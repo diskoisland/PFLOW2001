@@ -11,7 +11,7 @@ Angst+Pfister PFLOW2001 MEMS mass flow sensor family Arduino library. Based on h
 1. Read sensor air flow data.
 2. Read sensor serial number.
 3. Reset sensor zero flow offset.
-4. Read ambient temperature of the sensor.
+4. Read sensor inline gas temperature.
 5. Perform CRC-8 check.
 6. Return sensor error strings (human-readable).
 
