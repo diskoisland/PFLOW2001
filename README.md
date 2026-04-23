@@ -1,5 +1,6 @@
 # PFLOW2001
-Ross Edwards, Jan 2026
+Ross Edwards, Jan 2026.
+
 Arduino library for Angst + Pfister Pflow 2001 gas flow sensor 
 Angst+Pfister PFLOW2001 MEMS mass flow sensor family Arduino library. Based on https://sensorsandpower.angst-pfister.com/fileadmin/products/datasheets/263/PFLOW2001_1610-21914-0033-E-0622.pdf.,  https://sensorsandpower.angst-pfister.com/fileadmin/products/datasheets/263/PFLOW2001-AN-I2C_1610-21914-0032-E-0622.pdf, https://sensorsandpower.angst-pfister.com/fileadmin/products/datasheets/263/PFLOW2001-AN-AP-I2C_1610-21914-0067-E-0423.pdf
 
