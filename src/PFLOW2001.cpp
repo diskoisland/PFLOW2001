@@ -3,10 +3,14 @@
 PFLOW2001::PFLOW2001(TwoWire& wirePort)
 : _wire(&wirePort), _address(DEFAULT_ADDRESS_7BIT), _lastError(OK), _emaFlow(NAN) {}
 
-bool PFLOW2001::begin(uint8_t address, uint32_t clockHz) {
+bool PFLOW2001::begin(uint8_t address, uint32_t clockHz, bool initWire) {
   _address = address;
-  _wire->begin();
-  _wire->setClock(clockHz);
+
+  if (initWire) {
+    _wire->begin();
+    _wire->setClock(clockHz);
+  }
+
   return ping();
 }
 
@@ -72,9 +76,12 @@ uint8_t PFLOW2001::crc8(const uint8_t* data, size_t len) {
   return crc;
 }
 
-bool PFLOW2001::scanKnownAddresses(TwoWire& wirePort, uint8_t& foundAddress) {
+bool PFLOW2001::scanKnownAddresses(TwoWire& wirePort, uint8_t& foundAddress, bool initWire) {
   const uint8_t candidates[] = { DEFAULT_ADDRESS_7BIT, ALT_ADDRESS_7BIT };
-  wirePort.begin();
+
+  if (initWire) {
+    wirePort.begin();
+  }
 
   for (uint8_t i = 0; i < sizeof(candidates); i++) {
     wirePort.beginTransmission(candidates[i]);

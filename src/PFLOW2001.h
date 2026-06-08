@@ -3,7 +3,6 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include <math.h>
 
 class PFLOW2001 {
 public:
@@ -26,7 +25,8 @@ public:
 
   explicit PFLOW2001(TwoWire& wirePort = Wire);
 
-  bool begin(uint8_t address = DEFAULT_ADDRESS_7BIT, uint32_t clockHz = 100000);
+  // Set initWire=false if the calling code has already called Wire.begin().
+  bool begin(uint8_t address = DEFAULT_ADDRESS_7BIT, uint32_t clockHz = 100000, bool initWire = true);
   bool ping();
 
   bool readFlow(float& flowSccm);
@@ -36,6 +36,7 @@ public:
   bool readAmbientTemperature(float& tempC);
   bool readGasTemperature(float& tempC);
 
+  // Blocking — delays sampleCount * sampleDelayMs ms (default 200 ms).
   bool readFilteredFlow(float& emaFlowSccm,
                         float& avgFlowSccm,
                         int sampleCount = 20,
@@ -51,7 +52,8 @@ public:
   void clearError();
 
   static uint8_t crc8(const uint8_t* data, size_t len);
-  static bool scanKnownAddresses(TwoWire& wirePort, uint8_t& foundAddress);
+  // Set initWire=false if the calling code has already called Wire.begin().
+  static bool scanKnownAddresses(TwoWire& wirePort, uint8_t& foundAddress, bool initWire = true);
 
 private:
   TwoWire* _wire;

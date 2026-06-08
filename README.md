@@ -26,11 +26,12 @@ Angst+Pfister PFLOW2001 MEMS mass flow sensor family Arduino library. Based on h
 
 ## Notes
 
-- library is based on Angst+Pfister PFLOW2001 data sheeet - Tested using low power unidirectional PFLOW2001-
-- The library defaults to the PFLOW2001 I2C address of `0x50`.
-- If your platform expects the alternate 7-bit form, try `0x28`.
+- Tested using the low-power unidirectional PFLOW2001. Based on the Angst+Pfister PFLOW2001 datasheet.
+- The library defaults to the PFLOW2001 I2C address of `0x50`. If your platform expects the alternate 7-bit form, try `0x28`.
 - The sensor requires a repeated-start read sequence, so the library uses `endTransmission(false)` before `requestFrom()`.
 - Only reset the sensor zero flow offset when the sensor is under confirmed zero-flow conditions.
+- If you have already called `Wire.begin()` before `begin()`, pass `initWire=false` to avoid reinitializing the bus: `sensor.begin(PFLOW2001::DEFAULT_ADDRESS_7BIT, 100000, false)`.
+- `readFilteredFlow()` is blocking — it calls `delay()` internally and will block for `sampleCount × sampleDelayMs` ms (default 200 ms). Do not use it in a time-critical loop.
 
 
 
